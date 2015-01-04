@@ -1,5 +1,4 @@
 ![Horus] (http://0.tqn.com/y/altreligion/1/S/6/2/-/-/eye-of-horus-tri.jpg)
-=========
 
 Horus
 =====
