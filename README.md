@@ -17,6 +17,11 @@ Basically when a experiment is started, the Horus responsibility is ask to the c
   - [ ] robot syntax sugar
   
 
+## How to start
+    
+    elixir --erl "--config config/kernel.config" --no-halt --cookie a_cookie_string --name "foo@luisbebop" -S mix
+  
+
 ## Requirements
 
 ### How to install Elixir on BeagleBone black
