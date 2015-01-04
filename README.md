@@ -19,7 +19,8 @@ Basically when a experiment is started, the Horus responsibility is ask to the c
 
 ## How to start
     
-    elixir --erl "--config config/kernel.config" --no-halt --cookie a_cookie_string --name "foo@luisbebop" -S mix
+    elixir --erl "-config config/kernel.config" --no-halt --cookie a_cookie_string --name "foo@luisbebop" -S mix
+    elixir --erl "-kernel inet_dist_listen_min 9100 -kernel inet_dist_listen_max 9115" --no-halt --cookie a_cookie_string --name "osiris@osiris.arcturus.io" -S mix
   
 
 ## Requirements
