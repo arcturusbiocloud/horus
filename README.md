@@ -1,5 +1,3 @@
-![Horus] (http://0.tqn.com/y/altreligion/1/S/6/2/-/-/eye-of-horus-tri.jpg)
-
 Horus
 =====
 
@@ -49,4 +47,6 @@ Basically when a experiment is started, the Horus responsibility is ask to the c
 
     vim .bashrc
     export PATH="$PATH:/root/elixir-1.0.2/bin"
+    
+![Horus] (http://0.tqn.com/y/altreligion/1/S/6/2/-/-/eye-of-horus-tri.jpg)
     
