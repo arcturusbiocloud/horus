@@ -8,7 +8,14 @@ defmodule Horus.Server do
   
   def init(opts) do
     # node monitoring and connection
-    {:ok,[]}
+    IO.puts "Horus.Server init"
+    url = Application.get_env(:horus, :master_node)[:url]
+    if url do
+      IO.puts "Horus.Server connecting to the master_node #{url}"
+      Node.set_cookie(Application.get_env(:horus, :master_node)[:cookie])
+      Node.monitor(url, true)
+    end
+    {:ok, []}
   end
   
   def handle_cast({:exec, exe, args}, state) do
@@ -29,6 +36,7 @@ defmodule Horus.Server do
   end
     
   def handle_cast(request, state) do
+    # Call the default implementation from GenServer
     super(request, state)
   end
     
@@ -44,5 +52,18 @@ defmodule Horus.Server do
     # Call the default implementation from GenServer
     super(request, from, state)
   end
+  
+  def handle_info({:nodedown, node}, state) do
+    # wait 1 second to auto-reconnect to the node
+    IO.puts "Horus.Server nodedown #{node}"
+    :timer.sleep(1000)
+    Node.monitor(node, true)
+    {:noreply, state}
+  end
 
+  def handle_info(request, state) do
+    # Call the default implementation from GenServer
+    super(request, state)
+  end
+  
 end

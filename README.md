@@ -9,16 +9,22 @@ Basically when a experiment is started, the Horus responsibility is ask to the c
 ## Feature Roadmap
 
   - [x] external process control
-  - [ ] node monitoring and auto reconnect
+  - [x] node monitoring and auto reconnect
   - [ ] serial port interface
   - [ ] storage device interface
   - [ ] robot syntax sugar
   
 
 ## How to start
+On the `Horus.Client` side add the `Horus` to your mix.exs deps but don't add to the application list. Start your main application using the configuration of node ports, cookie and name bellow:
+
+    elixir --erl "-kernel inet_dist_listen_min 9100 -kernel inet_dist_listen_max 9115" --no-halt --cookie qeSwOMmQ+BFt3cMjf1kazeIMRwhy45ySlbvFCuWsRcU= --name "isis@osiris.arcturus.io" -S mix
     
-    elixir --erl "-config config/kernel.config" --no-halt --cookie a_cookie_string --name "foo@luisbebop" -S mix
-    elixir --erl "-kernel inet_dist_listen_min 9100 -kernel inet_dist_listen_max 9115" --no-halt --cookie a_cookie_string --name "osiris@osiris.arcturus.io" -S mix
+See the `test/horus_text.exs` to learn how to use the `Horus.Client`
+    
+On the `Horus.Server` side clone the repository and start with:
+
+    elixir --no-halt --name "horus@osiris.arcturus.io" -S mix
   
 
 ## Requirements
