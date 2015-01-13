@@ -48,4 +48,13 @@ defmodule HorusTest do
     assert Enum.into(proc.out, "") == "helloworld\n"
   end
   
+  test "save a file on the server" do
+    file_path = "./test/horus_test.txt"
+    File.rm(file_path)
+    Horus.Client.save_file(file_path, "line1\nline2\nline3")
+    :timer.sleep(100)
+    assert File.read(file_path) == {:ok, "line1\nline2\nline3"}
+    File.rm(file_path)
+  end
+  
 end

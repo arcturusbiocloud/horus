@@ -6,6 +6,11 @@ defmodule Horus.Server do
     GenServer.start_link(__MODULE__, [], opts ++ [name: :horusserver])
   end
   
+  def init(opts) do
+    # node monitoring and connection
+    {:ok,[]}
+  end
+  
   def handle_cast({:exec, exe, args}, state) do
     proc = Porcelain.spawn(exe, args, out: :stream)
     {:noreply, [proc|state]}
@@ -15,11 +20,18 @@ defmodule Horus.Server do
     Proc.stop(proc)
     {:noreply, state}
   end
+  
+  def handle_cast({:save_file, file, content}, state) do
+    {:ok, file} = File.open file, [:write]
+    IO.binwrite file, content
+    File.close file
+    {:noreply, state}
+  end
     
   def handle_cast(request, state) do
     super(request, state)
   end
-  
+    
   def handle_call(:procs, _from, state) do
     {:reply, state, state}
   end

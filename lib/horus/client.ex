@@ -16,4 +16,8 @@ defmodule Horus.Client do
     GenServer.call({:horusserver, host}, {:alive, proc})
   end
   
+  def save_file(file, content, host \\ node()) do
+    GenServer.cast({:horusserver, host}, {:save_file, file, content})
+  end
+  
 end
