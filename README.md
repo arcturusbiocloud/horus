@@ -10,21 +10,21 @@ Basically when a experiment is started, the Horus responsibility is ask to the c
 
   - [x] external process control
   - [x] node monitoring and auto reconnect
-  - [ ] serial port interface
-  - [ ] storage device interface
+  - [ ] storage device interface (OpenPCR)
+  - [ ] serial port interface (labcontrol)
   - [ ] robot syntax sugar
   
 
 ## How to start
 On the `Horus.Client` side add the `Horus` to your mix.exs deps but don't add to the application list. Start your main application using the configuration of node ports, cookie and name bellow:
 
-    elixir --erl "-kernel inet_dist_listen_min 9100 -kernel inet_dist_listen_max 9115" --no-halt --cookie qeSwOMmQ+BFt3cMjf1kazeIMRwhy45ySlbvFCuWsRcU= --name "isis@osiris.arcturus.io" -S mix
+    elixir --erl "-kernel inet_dist_listen_min 9100 -kernel inet_dist_listen_max 9115" --no-halt --cookie qeSwOMmQ+BFt3cMjf1kazeIMRwhy45ySlbvFCuWsRcU= --name "isis@isis.arcturus.io" -S mix
     
 See the `test/horus_text.exs` to learn how to use the `Horus.Client`
     
 On the `Horus.Server` side clone the repository and start with:
 
-    elixir --no-halt --name "horus@osiris.arcturus.io" -S mix
+    elixir --no-halt --name "horus@beaglebone.nat" -S mix
   
 
 ## Requirements
