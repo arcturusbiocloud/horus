@@ -8,7 +8,7 @@ defmodule Horus.Server do
   
   def init(opts) do
     # node monitoring and connection
-    IO.puts "Horus.Server init"
+    IO.puts "Horus.Server init opts=#{inspect(opts)}"
     url = Application.get_env(:horus, :master_node)[:url]
     if url do
       IO.puts "Horus.Server connecting to the master_node #{url}"
