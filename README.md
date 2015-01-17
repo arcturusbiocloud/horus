@@ -17,23 +17,25 @@ Basically when a experiment is started, the Horus responsibility is ask to the c
   
 
 ## How to start
+On the `Horus.Server` side clone the repository and start with:
+
+    # dev
+    elixir --no-halt --sname "horus@luisbebop" -S mix
+    
+    # production
+    MIX_ENV=prod elixir --no-halt --name "horus@beaglebone.nat" -S mix
+
+
 On the `Horus.Client` side add the `Horus` to your mix.exs deps but don't add to the application list. Start your main application using the configuration of node ports, cookie and name bellow:
 
-    # production
-    elixir --erl "-kernel inet_dist_listen_min 9100 -kernel inet_dist_listen_max 9115" --no-halt --cookie qeSwOMmQ+BFt3cMjf1kazeIMRwhy45ySlbvFCuWsRcU= --name "isis@isis.arcturus.io" -S mix
     # dev with phoenix application
     elixir --sname foo@luisbebop --cookie abcdef -S mix phoenix.start
     
-See the `test/horus_text.exs` to learn how to use the `Horus.Client`
-    
-On the `Horus.Server` side clone the repository and start with:
-
     # production
-    MIX_ENV=prod elixir --no-halt --name "horus@beaglebone.nat" -S mix
-    # dev
-    elixir --no-halt --sname "horus@luisbebop" -S mix
+    elixir --erl "-kernel inet_dist_listen_min 9100 -kernel inet_dist_listen_max 9115" --no-halt --cookie qeSwOMmQ+BFt3cMjf1kazeIMRwhy45ySlbvFCuWsRcU= --name "isis@isis.arcturus.io" -S mix
+    
+See the `test/horus_text.exs` to learn how to use the `Horus.Client`
   
-
 ## Requirements
 
 ### How to install Elixir on BeagleBone black
