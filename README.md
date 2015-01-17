@@ -12,6 +12,7 @@ Basically when a experiment is started, the Horus responsibility is ask to the c
   - [x] node monitoring and auto reconnect
   - [ ] storage device interface (OpenPCR)
   - [ ] serial port interface (labcontrol)
+  - [ ] streaming interface
   - [ ] robot syntax sugar
   
 
@@ -30,7 +31,7 @@ On the `Horus.Server` side clone the repository and start with:
     # production
     elixir --no-halt --name "horus@beaglebone.nat" -S mix
     # dev
-    elixir --no-halt --sname "horus@luisbebop" --cookie abcdef -S mix
+    elixir --no-halt --sname "horus@luisbebop" -S mix
   
 
 ## Requirements
