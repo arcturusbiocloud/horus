@@ -29,7 +29,7 @@ See the `test/horus_text.exs` to learn how to use the `Horus.Client`
 On the `Horus.Server` side clone the repository and start with:
 
     # production
-    elixir --no-halt --name "horus@beaglebone.nat" -S mix
+    MIX_ENV=prod elixir --no-halt --name "horus@beaglebone.nat" -S mix
     # dev
     elixir --no-halt --sname "horus@luisbebop" -S mix
   
