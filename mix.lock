@@ -1,1 +1,1 @@
-%{"porcelain": {:hex, :porcelain, "2.0.0"}}
+%{"porcelain": {:git, "https://github.com/luisbebop/porcelain.git", "b1f80b988ddb296606374357d1e5f9cec512f0e4", []}}

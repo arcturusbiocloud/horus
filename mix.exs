@@ -26,6 +26,6 @@ defmodule Horus.Mixfile do
   #
   # Type `mix help deps` for more examples and options
   defp deps do
-    [{:porcelain, "~> 2.0"}]
+    [{:porcelain, git: "https://github.com/luisbebop/porcelain.git"}]
   end
 end
