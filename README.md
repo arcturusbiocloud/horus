@@ -12,7 +12,7 @@ Basically when a experiment is started, the Horus responsibility is ask to the c
   - [x] node monitoring and auto reconnect
   - [ ] storage device interface (OpenPCR)
   - [ ] serial port interface (labcontrol)
-  - [ ] streaming interface
+  - [ ] video streaming interface
   - [ ] robot syntax sugar
   
 
