@@ -23,6 +23,22 @@ defmodule Horus.Server do
     {:noreply, [proc|state]}
   end
   
+  def handle_cast({:shell, cmd}, state) do
+    # check the state to avoid double execution
+    previous_cmd = Enum.find(state, fn(x) -> x.cmd == cmd end)
+    if previous_cmd != nil, do: Proc.stop(previous_cmd.proc)
+    new_state = Enum.filter(state, fn(x) -> x.cmd != cmd end)
+    proc= Porcelain.spawn_shell(cmd, out: :stream)
+    {:noreply, [%{proc: proc, cmd: cmd}|new_state]}
+  end
+  
+  def handle_cast({:stop_shell, cmd}, state) do
+    proc = Enum.find(state, fn(x) -> x.cmd == cmd end)
+    if proc != nil, do: Proc.stop(proc.proc)
+    new_state = Enum.filter(state, fn(x) -> x.cmd != cmd end)
+    {:noreply, new_state}
+  end 
+    
   def handle_cast({:stop, proc}, state) do
     Proc.stop(proc)
     {:noreply, state}
@@ -46,6 +62,11 @@ defmodule Horus.Server do
   
   def handle_call({:alive, proc}, _from, state) do
     {:reply, Proc.alive?(proc), state}
+  end
+  
+  def handle_call({:get_shell, cmd}, _from, state) do
+    proc = Enum.find(state, fn(x) -> x.cmd == cmd end)
+    {:reply, proc, state}
   end
       
   def handle_call(request, from, state) do
