@@ -22,8 +22,8 @@ On the `Horus.Server` side clone the repository and start with:
     # dev
     elixir --no-halt --sname "horus@luisbebop" -S mix
     
-    # production
-    MIX_ENV=prod elixir --no-halt --name "horus@beaglebone.nat" -S mix
+    # production detached mode
+    MIX_ENV=prod elixir --no-halt --detached --name "horus@beaglebone.nat" -S mix
 
 
 On the `Horus.Client` side add the `Horus` to your mix.exs deps but don't add to the application list. Start your main application using the configuration of node ports, cookie and name bellow:
