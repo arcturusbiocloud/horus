@@ -70,7 +70,7 @@ defmodule Horus.Server do
   end
   
   def handle_call({:camera_streaming, action}, _from, state) do
-    cmd = "./root/horus/robot-scripts/camera/capture -F -o -c0|avconv -re -i - -vcodec copy -f flv -metadata streamName=myStream tcp://osiris.arcturus.io:6666"
+    cmd = "cd /root/horus/robot-scripts/camera/ && ./capture -F -o -c0|avconv -re -i - -vcodec copy -f flv -metadata streamName=myStream tcp://osiris.arcturus.io:6666"
     proc = Enum.find(state, fn(x) -> x.cmd == cmd end)
     if proc != nil, do: Proc.stop(proc.proc)
     new_state = Enum.filter(state, fn(x) -> x.cmd != cmd end)
