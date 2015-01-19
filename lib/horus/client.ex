@@ -32,4 +32,8 @@ defmodule Horus.Client do
     GenServer.cast({:horusserver, host}, {:save_file, file, content})
   end
   
+  def camera_streaming(action, host \\ node()) do
+    GenServer.call({:horusserver, host}, {:camera_streaming, action})
+  end
+      
 end

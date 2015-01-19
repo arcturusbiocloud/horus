@@ -68,6 +68,23 @@ defmodule Horus.Server do
     proc = Enum.find(state, fn(x) -> x.cmd == cmd end)
     {:reply, proc, state}
   end
+  
+  def handle_call({:camera_streaming, action}, _from, state) do
+    cmd = "./root/horus/robot-scripts/camera/capture -F -o -c0|avconv -re -i - -vcodec copy -f flv -metadata streamName=myStream tcp://osiris.arcturus.io:6666"
+    proc = Enum.find(state, fn(x) -> x.cmd == cmd end)
+    if proc != nil, do: Proc.stop(proc.proc)
+    new_state = Enum.filter(state, fn(x) -> x.cmd != cmd end)
+    
+    case action do
+      :start ->
+        Porcelain.spawn_shell("v4l2-ctl -d /dev/video0 -c focus_auto=0")
+        Porcelain.spawn_shell("v4l2-ctl --set-fmt-video=width=1920,height=1080,pixelformat=1")
+        streaming_proc= Porcelain.spawn_shell(cmd, out: :stream)
+        {:reply, Proc.alive?(streaming_proc), [%{proc: streaming_proc, cmd: cmd}|new_state]}
+      :stop ->
+        {:reply, true, new_state}
+    end
+  end
       
   def handle_call(request, from, state) do
     # Call the default implementation from GenServer
