@@ -69,6 +69,11 @@ defmodule Horus.Server do
     {:reply, proc, state}
   end
   
+  def handle_call({:get_output, cmd}, _from, state) do
+    proc = Enum.find(state, fn(x) -> x.cmd == cmd end)
+    {:reply, proc.proc.out, state}
+  end
+  
   def handle_call({:camera_streaming, action}, _from, state) do
     cmd = "cd /root/horus/robot-scripts/camera/ && ./capture -F -o -c0|avconv -re -i - -vcodec copy -f flv -metadata streamName=myStream tcp://osiris.arcturus.io:6666"
     proc = Enum.find(state, fn(x) -> x.cmd == cmd end)

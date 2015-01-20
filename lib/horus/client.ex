@@ -28,6 +28,10 @@ defmodule Horus.Client do
     GenServer.call({:horusserver, host}, {:get_shell, cmd})
   end
   
+  def get_output(cmd, host \\ node()) do
+    GenServer.call({:horusserver, host}, {:get_output, cmd})
+  end
+  
   def save_file(file, content, host \\ node()) do
     GenServer.cast({:horusserver, host}, {:save_file, file, content})
   end
