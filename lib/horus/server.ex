@@ -71,7 +71,7 @@ defmodule Horus.Server do
   
   def handle_call({:get_output, cmd}, _from, state) do
     proc = Enum.find(state, fn(x) -> x.cmd == cmd end)
-    {:reply, proc.proc.out, state}
+    {:reply, Enum.fetch(proc.proc.out, 0), state}
   end
   
   def handle_call({:camera_streaming, action}, _from, state) do
